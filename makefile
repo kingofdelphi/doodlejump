@@ -1,4 +1,4 @@
-CXX = gcc
+CXX = gcc -std=c99
 LDFLAGS = `pkg-config --libs SDL_image` `pkg-config --libs SDL_ttf` `pkg-config --libs SDL_mixer`
 CXXFLAGS = `pkg-config --cflags SDL_image` `pkg-config --cflags SDL_ttf` `pkg-config --cflags SDL_mixer`
 TARGET = game

@@ -1,6 +1,6 @@
 #include "sdldecl.h"
 #include "about.h"
-void aboutloop(SDL_Surface *screen)
+int aboutloop(SDL_Surface *screen)
 {
 SDL_Event event;
 TTF_Font *bfont = TTF_OpenFont("Font/calibri.ttf",BIGFONT);//20 is the about font size
