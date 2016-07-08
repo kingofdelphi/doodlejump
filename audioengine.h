@@ -1,5 +1,3 @@
-
-
 #define MENUSOUND 0
 #define JUMPSOUND 1
 #define SINGLESPRINGSOUND 2

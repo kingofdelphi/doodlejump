@@ -1,1 +1,1 @@
-Doodle Sphagetti Jump
+Doodle Spaghetti Jump
