@@ -73,7 +73,7 @@ int highscoreloop(SDL_Surface *screen, SDL_Window * window) {
         } //
 
         hght = (SCREEN_HEIGHT-caption->clip_rect.h  - hght) /2;
-        SDL_BlitSurface(caption,0,screen,&(SDL_Rect){(SCREEN_WIDTH+SCORE_WIDTH-caption->clip_rect.w)/2,hght});
+        SDL_BlitSurface(caption,0,screen,&(SDL_Rect){(SCREEN_WIDTH-caption->clip_rect.w)/2,hght});
         hght +=caption->clip_rect.h + SCOREGAP;
         int i;
         for (i=0;i<count;i++) {
@@ -84,7 +84,7 @@ int highscoreloop(SDL_Surface *screen, SDL_Window * window) {
             SDL_FreeSurface(txt);
             sprintf(tmpstr,"%d",scorelist[i].score);
             txt =TTF_RenderText_Blended(fontsmall,tmpstr,(SDL_Color){0,0,0});
-            SDL_BlitSurface(txt,0,screen,&(SDL_Rect){SCREEN_WIDTH+SCORE_WIDTH-LEFTRIGHTGAP-txt->clip_rect.w,hght});
+            SDL_BlitSurface(txt,0,screen,&(SDL_Rect){SCREEN_WIDTH-LEFTRIGHTGAP-txt->clip_rect.w,hght});
             hght +=txt->clip_rect.h + SCOREGAP;
 
             SDL_FreeSurface(txt);

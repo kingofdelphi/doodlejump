@@ -2,8 +2,8 @@
 #include "highscore.h" //only retrievelist function needed but whats other alternative
 #include "audioengine.h"
 #define POWERUP_RELEASE_VELOCITY 10
-#define SCORELEVELY SCREEN_HEIGHT/2
-#define SCORELEVELX 20
+#define SCORELEVELY 30
+#define SCORELEVELX (SCREEN_WIDTH - 100)
 #define MAXHEIGHT 21
 #define MAXHELIHEIGHT 50
 #define MAXROCKETHEIGHT 80

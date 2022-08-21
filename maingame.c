@@ -70,7 +70,7 @@ int gameloop(SDL_Surface *screen, SDL_Window *window,Mix_Chunk** snd) {
     int inputhighscore=0;
     int springshoehits=0;
     int gamepause=0;
-    SDL_Rect scorerect[] = {{SCREEN_WIDTH+SCORELEVELX,SCORELEVELY},{SCREEN_WIDTH/2,SCREEN_HEIGHT/2}};
+    SDL_Rect scorerect[] = {{SCORELEVELX,SCORELEVELY},{SCREEN_WIDTH/2,SCREEN_HEIGHT/2}};
     SDL_Surface *doodlenormal[] = {
         IMG_Load("Images/Doodle Origleft.png"),
         IMG_Load("Images/Doodle Origright.png"),
@@ -367,7 +367,10 @@ int gameloop(SDL_Surface *screen, SDL_Window *window,Mix_Chunk** snd) {
             if (doodle.y <=80)//where should scrolling be stopped
             {
                 gameover=1;//now display score
-                if (writehighscore(score,0,1)) inputhighscore=1;
+                if (writehighscore(score,0,1)) {
+                    inputhighscore=1;
+                    highscorelength=0;
+                }
             }//falling end
 
         }

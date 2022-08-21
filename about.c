@@ -26,8 +26,8 @@ int aboutloop(SDL_Surface *screen, SDL_Window *window) {
         }
         //rendering
         SDL_FillRect(screen,&screen->clip_rect,SDL_MapRGB(screen->format,255,255,255));
-        SDL_BlitSurface(caption,0,screen,&(SDL_Rect){(SCREEN_WIDTH+SCORE_WIDTH-caption->clip_rect.w)/2,(SCREEN_HEIGHT-caption->clip_rect.h-txt->clip_rect.h-MSGGAP)/2});
-        SDL_BlitSurface(txt,0,screen,&(SDL_Rect){(SCREEN_WIDTH+SCORE_WIDTH-txt->clip_rect.w)/2,(SCREEN_HEIGHT-caption->clip_rect.h-txt->clip_rect.h-MSGGAP)/2 + caption->clip_rect.h + MSGGAP});
+        SDL_BlitSurface(caption,0,screen,&(SDL_Rect){(SCREEN_WIDTH-caption->clip_rect.w)/2,(SCREEN_HEIGHT-caption->clip_rect.h-txt->clip_rect.h-MSGGAP)/2});
+        SDL_BlitSurface(txt,0,screen,&(SDL_Rect){(SCREEN_WIDTH-txt->clip_rect.w)/2,(SCREEN_HEIGHT-caption->clip_rect.h-txt->clip_rect.h-MSGGAP)/2 + caption->clip_rect.h + MSGGAP});
 		SDL_UpdateWindowSurface(window);
 
     }
