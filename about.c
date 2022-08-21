@@ -1,7 +1,7 @@
 #include "sdldecl.h"
 #include "about.h"
 
-int aboutloop(SDL_Surface *screen) {
+int aboutloop(SDL_Surface *screen, SDL_Window *window) {
     SDL_Event event;
     TTF_Font *bfont = TTF_OpenFont("Font/calibri.ttf",BIGFONT);//20 is the about font size
     TTF_Font *sfont = TTF_OpenFont("Font/calibri.ttf",SMALLFONT);//20 is the about font size
@@ -28,6 +28,7 @@ int aboutloop(SDL_Surface *screen) {
         SDL_FillRect(screen,&screen->clip_rect,SDL_MapRGB(screen->format,255,255,255));
         SDL_BlitSurface(caption,0,screen,&(SDL_Rect){(SCREEN_WIDTH+SCORE_WIDTH-caption->clip_rect.w)/2,(SCREEN_HEIGHT-caption->clip_rect.h-txt->clip_rect.h-MSGGAP)/2});
         SDL_BlitSurface(txt,0,screen,&(SDL_Rect){(SCREEN_WIDTH+SCORE_WIDTH-txt->clip_rect.w)/2,(SCREEN_HEIGHT-caption->clip_rect.h-txt->clip_rect.h-MSGGAP)/2 + caption->clip_rect.h + MSGGAP});
-        SDL_Flip(screen);
+		SDL_UpdateWindowSurface(window);
+
     }
 }

@@ -52,7 +52,7 @@ void placeplatformrandom(PLATFORM *platform,int *poweruptime,int*slidertime,int*
     }
 }
 
-int gameloop(SDL_Surface *screen,Mix_Chunk** snd) {
+int gameloop(SDL_Surface *screen, SDL_Window *window,Mix_Chunk** snd) {
     SDL_Event event;
     int jumping=0,falling=1;
     int left=0,right=0;
@@ -157,9 +157,9 @@ int gameloop(SDL_Surface *screen,Mix_Chunk** snd) {
                         break;
                 }
             } else if (event.type==SDL_KEYDOWN && inputhighscore) {
-                if (highscorelength <MAXDISPLAYNAME && ((event.key.keysym.unicode >='A' && event.key.keysym.unicode <='Z') || (event.key.keysym.unicode >='a' && event.key.keysym.unicode <='z')))
+                if (highscorelength <MAXDISPLAYNAME && (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z))
                 {
-                    highscorename[highscorelength++] = event.key.keysym.unicode;
+                    highscorename[highscorelength++] = (char)event.key.keysym.sym -  ('a' - 'A')* ((event.key.keysym.mod & KMOD_SHIFT) > 0);
                 } else if (event.key.keysym.sym ==SDLK_BACKSPACE && highscorelength) {
                     highscorename[--highscorelength] = '\0';
                 } else if (event.key.keysym.sym ==SDLK_ESCAPE || event.key.keysym.sym ==SDLK_RETURN) {
@@ -376,11 +376,11 @@ int gameloop(SDL_Surface *screen,Mix_Chunk** snd) {
             if (left) {
                 doodle.x+=xspeed;
                 xspeed-=.5;
-                if (abs(xspeed)>=MAXSPEED) xspeed=-MAXSPEED;
+                if (fabs(xspeed)>=MAXSPEED) xspeed=-MAXSPEED;
             } else if (right) {
                 doodle.x+=(int)xspeed;
                 xspeed+=.5;
-                if (abs(xspeed)>=MAXSPEED) xspeed=MAXSPEED;
+                if (fabs(xspeed)>=MAXSPEED) xspeed=MAXSPEED;
             } else {//decay speed
                 if (xspeed >0) xspeed-=0.5;
                 else if (xspeed<0) xspeed+=0.5;
@@ -447,14 +447,14 @@ int gameloop(SDL_Surface *screen,Mix_Chunk** snd) {
 
             SDL_Surface *srf=SDL_CreateRGBSurfaceFrom(screen->pixels,SCREEN_WIDTH+SCORE_WIDTH,SCREEN_HEIGHT,32,0,0,0,0,0);
             SDL_FillRect(srf,&srf->clip_rect,SDL_MapRGB(srf->format,255,255,255));
-            SDL_SetAlpha(srf,SDL_SRCALPHA,235);
+            SDL_SetSurfaceAlphaMod(srf, 235);
             SDL_BlitSurface(srf,0,screen,&(SDL_Rect){0,0});
             SDL_FreeSurface(srf);
             srf = TTF_RenderText_Blended(scorefont,"Paused",(SDL_Color){0,0,0});
             SDL_BlitSurface(srf,0,screen,&(SDL_Rect){(SCREEN_WIDTH+SCORE_WIDTH-srf->clip_rect.w)/2,(SCREEN_HEIGHT-srf->clip_rect.h) /2});
             SDL_FreeSurface(srf);
-        } else SDL_SetAlpha(screen,SDL_SRCALPHA,SDL_ALPHA_OPAQUE);
-        SDL_Flip(screen);
+        } else SDL_SetSurfaceAlphaMod(screen, SDL_ALPHA_OPAQUE);
+		SDL_UpdateWindowSurface(window);
         //frame rate handling
 
         if (SDL_GetTicks() - tick < 1000/FRAME_RATE) SDL_Delay(1000/FRAME_RATE-SDL_GetTicks()+tick);

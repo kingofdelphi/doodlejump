@@ -29,7 +29,7 @@ int retrievelist(SCOREDATA *scorelist,FILE *fp) {
 }
 
 
-int highscoreloop(SDL_Surface *screen) {
+int highscoreloop(SDL_Surface *screen, SDL_Window * window) {
     SDL_Event event;
     FILE *fp=fopen("highscores.dat","a+b");
     rewind(fp);
@@ -90,7 +90,8 @@ int highscoreloop(SDL_Surface *screen) {
             SDL_FreeSurface(txt);
 
         }
-        SDL_Flip(screen);
+		SDL_UpdateWindowSurface(window);
+
     }
 }
 

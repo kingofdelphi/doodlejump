@@ -31,7 +31,7 @@ void updatebuttons(SDL_Surface *surface,MENUITEM *menu,int cnt,TTF_Font *font) {
 
 }
 
-int menuloop(SDL_Surface *screen,int *selection,int *menupressed,Mix_Chunk **snd) {
+int menuloop(SDL_Surface *screen,SDL_Window *window, int *selection,int *menupressed,Mix_Chunk **snd) {
     SDL_Event event;
     MENUITEM menulst[] = {
         {"play",0},
@@ -119,7 +119,8 @@ int menuloop(SDL_Surface *screen,int *selection,int *menupressed,Mix_Chunk **snd
         SDL_BlitSurface(platformgreen,0,screen,&platformrect);
         //blit doodle
         SDL_BlitSurface(doodle,0,screen,&doodlerect);
-        SDL_Flip(screen);
+		SDL_UpdateWindowSurface(window);
+
         //frme rate handling
         if (SDL_GetTicks() - tick < 1000/FRAME_RATE) SDL_Delay(1000/FRAME_RATE-SDL_GetTicks()+tick);
     }

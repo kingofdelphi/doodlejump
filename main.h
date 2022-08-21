@@ -1,7 +1,7 @@
-int menuloop(SDL_Surface *,int *,int *,Mix_Chunk**);
+int menuloop(SDL_Surface *,SDL_Window *, int *,int *,Mix_Chunk**);
 
 
-int gameloop(SDL_Surface *,Mix_Chunk**);
+int gameloop(SDL_Surface *,SDL_Window *, Mix_Chunk**);
 
-int highscoreloop(SDL_Surface *);
-int aboutloop(SDL_Surface *);
+int highscoreloop(SDL_Surface *, SDL_Window *);
+int aboutloop(SDL_Surface *, SDL_Window *);
