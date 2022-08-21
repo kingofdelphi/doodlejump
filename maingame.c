@@ -159,7 +159,7 @@ int gameloop(SDL_Surface *screen, SDL_Window *window,Mix_Chunk** snd) {
             } else if (event.type==SDL_KEYDOWN && inputhighscore) {
                 if (highscorelength <MAXDISPLAYNAME && (event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z))
                 {
-                    highscorename[highscorelength++] = (char)event.key.keysym.sym -  ('a' - 'A')* ((event.key.keysym.mod & KMOD_SHIFT) > 0);
+                    highscorename[highscorelength++] = (char)(event.key.keysym.sym -  ('a' - 'A')* ((event.key.keysym.mod & KMOD_SHIFT) > 0));
                 } else if (event.key.keysym.sym ==SDLK_BACKSPACE && highscorelength) {
                     highscorename[--highscorelength] = '\0';
                 } else if (event.key.keysym.sym ==SDLK_ESCAPE || event.key.keysym.sym ==SDLK_RETURN) {
