@@ -448,13 +448,14 @@ int gameloop(SDL_Surface *screen, SDL_Window *window,Mix_Chunk** snd) {
         if (gamepause)//handling paused game status
         {
 
-            SDL_Surface *srf=SDL_CreateRGBSurfaceFrom(screen->pixels,SCREEN_WIDTH+SCORE_WIDTH,SCREEN_HEIGHT,32,0,0,0,0,0);
+            SDL_Surface *srf=SDL_CreateRGBSurface(0,SCREEN_WIDTH,SCREEN_HEIGHT,32,0,0,0,255);
+            SDL_SetSurfaceBlendMode(srf, SDL_BLENDMODE_BLEND);
             SDL_FillRect(srf,&srf->clip_rect,SDL_MapRGB(srf->format,255,255,255));
             SDL_SetSurfaceAlphaMod(srf, 235);
             SDL_BlitSurface(srf,0,screen,&(SDL_Rect){0,0});
             SDL_FreeSurface(srf);
             srf = TTF_RenderText_Blended(scorefont,"Paused",(SDL_Color){0,0,0});
-            SDL_BlitSurface(srf,0,screen,&(SDL_Rect){(SCREEN_WIDTH+SCORE_WIDTH-srf->clip_rect.w)/2,(SCREEN_HEIGHT-srf->clip_rect.h) /2});
+            SDL_BlitSurface(srf,0,screen,&(SDL_Rect){(SCREEN_WIDTH-srf->clip_rect.w)/2,(SCREEN_HEIGHT-srf->clip_rect.h) /2});
             SDL_FreeSurface(srf);
         } else SDL_SetSurfaceAlphaMod(screen, SDL_ALPHA_OPAQUE);
 		SDL_UpdateWindowSurface(window);
